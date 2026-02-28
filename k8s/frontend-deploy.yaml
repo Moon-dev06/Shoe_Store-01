@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: refined-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: refined-frontend
+  template:
+    metadata:
+      labels:
+        app: refined-frontend
+    spec:
+      containers:
+      - name: frontend
+        image: moondev06/refined-frontend:latest # ใช้ Image ที่คุณเพิ่ง Push ไป
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  type: LoadBalancer 
+  selector:
+    app: refined-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

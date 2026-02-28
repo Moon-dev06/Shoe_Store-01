@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refined | Premium Footwear & Apparel</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav id="navbar" class="fixed w-full z-40 px-8 py-8 flex justify-between items-center text-white">
+        <div class="text-2xl font-bold tracking-[0.4em] uppercase">Refined</div>
+        <div class="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.2em] font-medium">
+            <a href="#collection" class="hover:opacity-50 transition">Collection</a>
+            <a href="#" class="hover:opacity-50 transition">The Craft</a>
+        </div>
+        <div class="flex items-center space-x-8 text-[10px] uppercase tracking-widest cursor-pointer">
+            <div onclick="toggleCart()" class="border-b border-transparent hover:border-current transition">
+                Cart <span id="cart-count-nav" class="ml-1 text-gray-400">(0)</span>
+            </div>
+        </div>
+    </nav>
+
+    <div id="cart-overlay" onclick="toggleCart()" class="cart-overlay fixed inset-0 bg-black/40 z-[60]"></div>
+    <div id="side-cart" class="fixed right-0 top-0 h-full w-full md:w-[450px] bg-white z-[70] shadow-2xl p-8 flex flex-col">
+        <div class="flex justify-between items-center mb-10">
+            <h2 class="text-2xl italic font-serif">Shopping Bag</h2>
+            <button onclick="toggleCart()" class="text-[10px] uppercase tracking-widest text-gray-400">Close</button>
+        </div>
+        
+        <div id="cart-items" class="flex-grow overflow-y-auto space-y-8 pr-2">
+        </div>
+
+        <div class="border-t border-gray-100 pt-8 mt-6">
+            <div class="flex justify-between mb-6">
+                <span class="text-[10px] uppercase tracking-widest text-gray-400">Subtotal</span>
+                <span id="cart-total" class="text-lg font-medium tracking-wider">฿0</span>
+            </div>
+            <button class="w-full bg-black text-white py-5 text-[10px] uppercase tracking-[0.3em] hover:bg-zinc-800 transition">Checkout</button>
+        </div>
+    </div>
+
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img id="hero-img" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070" class="w-full h-full object-cover scale-110">
+            <div class="absolute inset-0 bg-black/30"></div>
+        </div>
+        <div class="relative z-10 text-center text-white px-4 reveal">
+            <span class="text-[10px] uppercase tracking-[0.6em] mb-6 block font-light">Elegance in Every Step</span>
+            <h1 class="text-6xl md:text-8xl mb-10 leading-tight">Refined <br><span class="italic font-light">Classics</span></h1>
+        </div>
+    </section>
+
+    <section id="collection" class="py-32 px-8 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto mb-16 reveal flex justify-between items-end">
+            <div>
+                <span class="text-[10px] uppercase tracking-[0.3em] text-gray-400 mb-2 block">Curation</span>
+                <h2 class="text-4xl italic">The Collection</h2>
+            </div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto">
+            <div class="swiper mySwiper reveal px-4">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide product-card">
+                        <div class="aspect-[3/4] overflow-hidden mb-6 bg-[#f5f5f5]">
+                            <img src="https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?q=80&w=800" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-lg mb-1 italic">The Heritage Oxford</h3>
+                        <p class="text-sm mb-4">฿4,200</p>
+                        <button onclick="addToCart('Heritage Oxford', 4200, 'https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?q=80&w=200')" 
+                                class="text-[9px] uppercase tracking-[0.2em] border border-black px-6 py-2 hover:bg-black hover:text-white transition">Add to Cart</button>
+                    </div>
+
+                    <div class="swiper-slide product-card">
+                        <div class="aspect-[3/4] overflow-hidden mb-6 bg-[#f5f5f5]">
+                            <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-lg mb-1 italic">Modern Minimalist</h3>
+                        <p class="text-sm mb-4">฿3,500</p>
+                        <button onclick="addToCart('Modern Minimalist', 3500, 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=200')" 
+                                class="text-[9px] uppercase tracking-[0.2em] border border-black px-6 py-2 hover:bg-black hover:text-white transition">Add to Cart</button>
+                    </div>
+
+                    <div class="swiper-slide product-card">
+                        <div class="aspect-[3/4] overflow-hidden mb-6 bg-[#f5f5f5]">
+                            <img src="https://images.unsplash.com/photo-1616406432452-07bc5938759d?q=80&w=800" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-lg mb-1 italic">The Urban Chelsea</h3>
+                        <p class="text-sm mb-4">฿4,800</p>
+                        <button onclick="addToCart('Urban Chelsea', 4800, 'https://images.unsplash.com/photo-1616406432452-07bc5938759d?q=80&w=200')" 
+                                class="text-[9px] uppercase tracking-[0.2em] border border-black px-6 py-2 hover:bg-black hover:text-white transition">Add to Cart</button>
+                    </div>
+
+                    <div class="swiper-slide product-card">
+                        <div class="aspect-[3/4] overflow-hidden mb-6 bg-[#f5f5f5]">
+                            <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-lg mb-1 italic">Classic Suede</h3>
+                        <p class="text-sm mb-4">฿3,900</p>
+                        <button onclick="addToCart('Classic Suede', 3900, 'https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=200')" 
+                                class="text-[9px] uppercase tracking-[0.2em] border border-black px-6 py-2 hover:bg-black hover:text-white transition">Add to Cart</button>
+                    </div>
+
+                    <div class="swiper-slide product-card">
+                        <div class="aspect-[3/4] overflow-hidden mb-6 bg-[#f5f5f5]">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-lg mb-1 italic">Crimson Runner</h3>
+                        <p class="text-sm mb-4">฿2,800</p>
+                        <button onclick="addToCart('Crimson Runner', 2800, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=200')" 
+                                class="text-[9px] uppercase tracking-[0.2em] border border-black px-6 py-2 hover:bg-black hover:text-white transition">Add to Cart</button>
+                    </div>
+
+                    <div class="swiper-slide product-card">
+                        <div class="aspect-[3/4] overflow-hidden mb-6 bg-[#f5f5f5]">
+                            <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=800" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-lg mb-1 italic">Retro Canvas</h3>
+                        <p class="text-sm mb-4">฿3,200</p>
+                        <button onclick="addToCart('Retro Canvas', 3200, 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?q=80&w=200')" 
+                                class="text-[9px] uppercase tracking-[0.2em] border border-black px-6 py-2 hover:bg-black hover:text-white transition">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </section>
+
+    <footer class="bg-[#111] text-white py-24 px-8 mt-20">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="text-2xl font-bold tracking-[0.4em] uppercase mb-8">Refined</div>
+            <p class="text-gray-600 text-[10px] uppercase tracking-widest">&copy; 2025 Refined. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
