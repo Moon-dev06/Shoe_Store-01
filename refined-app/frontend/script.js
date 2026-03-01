@@ -109,3 +109,85 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// 6. User Login Simulation
+let isSignUpMode = false;
+let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+
+// อัปเดตสถานะ User ตอนโหลดหน้าเว็บ
+document.addEventListener('DOMContentLoaded', () => {
+    updateUserUI();
+});
+
+function toggleLogin() {
+    const overlay = document.getElementById('login-overlay');
+    overlay.classList.toggle('hidden');
+}
+
+function switchAuthMode() {
+    isSignUpMode = !isSignUpMode;
+    const title = document.getElementById('auth-title');
+    const subtitle = document.getElementById('auth-subtitle');
+    const btn = document.getElementById('switch-mode-btn');
+    
+    if (isSignUpMode) {
+        title.innerText = "Create Account";
+        subtitle.innerText = "Join the Refined members";
+        btn.innerHTML = 'Already have an account? <span class="text-black border-b border-black/20">Sign In</span>';
+    } else {
+        title.innerText = "Sign In";
+        subtitle.innerText = "Enter your credentials";
+        btn.innerHTML = "Don't have an account? <span class='text-black border-b border-black/20'>Create One</span>";
+    }
+}
+
+function handleAuth(event) {
+    event.preventDefault();
+    const email = document.getElementById('auth-email').value;
+    const password = document.getElementById('auth-password').value;
+    const errorMsg = document.getElementById('auth-error');
+
+    // ระบบจำลองการยืนยันตัวตน (Mock Auth)
+    if (isSignUpMode) {
+        // จำลองการสมัครสมาชิก
+        const newUser = { email: email.split('@')[0], emailFull: email };
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
+        currentUser = newUser;
+        alert("Account Created Successfully!");
+    } else {
+        // จำลองการ Login (ถ้ากรอกอะไรมาก็ได้ถือว่าผ่าน)
+        if (password.length >= 4) {
+            const user = { email: email.split('@')[0], emailFull: email };
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            currentUser = user;
+        } else {
+            errorMsg.classList.remove('hidden');
+            return;
+        }
+    }
+
+    errorMsg.classList.add('hidden');
+    updateUserUI();
+    toggleLogin();
+}
+
+function handleUserClick() {
+    if (currentUser) {
+        if (confirm("Do you want to sign out?")) {
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            updateUserUI();
+        }
+    } else {
+        toggleLogin();
+    }
+}
+
+function updateUserUI() {
+    const display = document.getElementById('user-name-display');
+    if (currentUser) {
+        display.innerText = `Account (${currentUser.email})`;
+    } else {
+        display.innerText = "Login";
+    }
+}

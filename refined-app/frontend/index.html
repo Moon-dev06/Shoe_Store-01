@@ -14,6 +14,43 @@
 </head>
 <body>
 
+    <div id="login-overlay" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center backdrop-blur-sm">
+    <div class="bg-white w-full max-w-md p-10 shadow-2xl reveal relative">
+        <button onclick="toggleLogin()" class="absolute right-6 top-6 text-gray-400 hover:text-black transition">
+            <i class="bi bi-x-lg text-xs"></i>
+        </button>
+        
+        <div class="text-center mb-10">
+            <div class="text-xl font-bold tracking-[0.4em] uppercase mb-4">Refined</div>
+            <h2 id="auth-title" class="text-2xl italic font-serif">Sign In</h2>
+            <p id="auth-subtitle" class="text-[10px] text-gray-400 uppercase tracking-widest mt-2">Enter your credentials</p>
+        </div>
+
+        <form id="auth-form" onsubmit="handleAuth(event)" class="space-y-6">
+            <div>
+                <label class="text-[9px] uppercase tracking-[0.2em] text-gray-500 block mb-2">Email Address</label>
+                <input type="email" id="auth-email" required class="w-full border-b border-gray-200 py-2 focus:border-black outline-none transition text-sm font-light">
+            </div>
+            <div>
+                <label class="text-[9px] uppercase tracking-[0.2em] text-gray-500 block mb-2">Password</label>
+                <input type="password" id="auth-password" required class="w-full border-b border-gray-200 py-2 focus:border-black outline-none transition text-sm font-light">
+            </div>
+            
+            <div id="auth-error" class="text-red-500 text-[9px] uppercase tracking-widest hidden">Invalid credentials. Please try again.</div>
+
+            <button type="submit" class="w-full bg-black text-white py-4 text-[10px] uppercase tracking-[0.3em] hover:bg-zinc-800 transition shadow-lg">
+                Continue
+            </button>
+        </form>
+
+        <div class="mt-8 text-center">
+            <button onclick="switchAuthMode()" id="switch-mode-btn" class="text-[9px] uppercase tracking-[0.2em] text-gray-400 hover:text-black transition">
+                Don't have an account? <span class="text-black border-b border-black/20">Create One</span>
+            </button>
+        </div>
+    </div>
+</div>
+
     <nav id="navbar" class="fixed w-full z-40 px-8 py-8 flex justify-between items-center text-white">
         <div class="text-2xl font-bold tracking-[0.4em] uppercase">Refined</div>
         <div class="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.2em] font-medium">
@@ -21,6 +58,9 @@
             <a href="#the-craft" class="hover:opacity-50 transition">The Craft</a>
         </div>
         <div class="flex items-center space-x-8 text-[10px] uppercase tracking-widest cursor-pointer">
+            <div id="user-status" onclick="handleUserClick()" class="hover:opacity-50 transition">
+                <span id="user-name-display">Login</span>
+            </div>
             <div onclick="toggleCart()" class="border-b border-transparent hover:border-current transition">
                 Cart <span id="cart-count-nav" class="ml-1 text-gray-400">(0)</span>
             </div>
