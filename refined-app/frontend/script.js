@@ -191,3 +191,21 @@ function updateUserUI() {
         display.innerText = "Login";
     }
 }
+
+// ค้นหาปุ่ม Checkout จากหน้าเว็บ
+const checkoutBtn = document.querySelector('.checkout'); // ตรวจสอบว่า Class ใน HTML ชื่อ 'checkout' หรือไม่
+
+if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+        // ดึงยอดรวมมาโชว์ใน Alert (อ้างอิงจากราคา ฿10,500 ในภาพ image_beb35c.jpg)
+        const totalAmount = document.querySelector('.subtotal')?.textContent || "0";
+        
+        // แสดงหน้าต่างยืนยัน
+        const isConfirmed = confirm(`ยืนยันการชำระเงินจำนวน ${totalAmount} หรือไม่?`);
+        
+        if (isConfirmed) {
+            alert("✅ ชำระเงินสำเร็จ! ขอบคุณที่ใช้บริการ REFINED");
+            // คุณสามารถเพิ่มฟังก์ชันล้างตะกร้าสินค้าตรงนี้ได้
+        }
+    });
+}
