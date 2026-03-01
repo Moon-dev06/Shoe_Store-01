@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: backend
 spec:
-  replicas: 1 # เริ่มต้น 1 ตัว
+  replicas: 10000 # เริ่มต้น 1 ตัว
   selector:
     matchLabels:
       app: backend
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend-container
-        image: <USER_DOCKER_HUB>/shoe-backend:latest
+        image: moondev06/shoe-backend:v4
         ports:
         - containerPort: 5000
         env:

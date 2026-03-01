@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: moondev06/refined-frontend:latest # ใช้ Image ที่คุณเพิ่ง Push ไป
+        image: moondev06/shoe-frontend:v2
         ports:
         - containerPort: 80
 ---
